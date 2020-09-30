@@ -1,15 +1,21 @@
 package io.jzheaux.springsecurity.resolutions;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.UUID;
 
 @Entity(name="users")
 public class User implements Serializable {
     @Id
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator"
+    )
     UUID id;
     @Column
     String username;
@@ -28,44 +34,12 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public UUID getId() {
-        return id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
     public void setUsername(String username) {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    public void setUserAuthorities(Collection<UserAuthority> userAuthorities) {
-        this.userAuthorities = userAuthorities;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public Collection<UserAuthority> getUserAuthorities() {
-        return Collections.unmodifiableCollection(this.userAuthorities);
     }
 
     public void grantAuthority(String authority) {
