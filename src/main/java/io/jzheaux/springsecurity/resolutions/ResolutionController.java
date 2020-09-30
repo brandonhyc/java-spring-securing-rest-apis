@@ -30,13 +30,13 @@ public class ResolutionController {
 	public Iterable<Resolution> read() {
 		Iterable<Resolution> resolutions = this.resolutions.findAll();
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//		if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("user:read"))) {
+		if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("user:read"))) {
 			for (Resolution resolution : resolutions) {
 				String fullName = this.users.findByUsername(resolution.getOwner())
 						.map(User::getFullName).orElse("Anonymous");
 				resolution.setText(resolution.getText() + ", by " + fullName);
 			}
-//		}
+		}
 		return resolutions;
 	}
 
