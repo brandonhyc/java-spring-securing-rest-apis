@@ -32,9 +32,9 @@ public class ResolutionController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("user:read"))) {
 			for (Resolution resolution : resolutions) {
-				String fullName = this.users.findByUsername(resolution.getOwner())
-						.map(User::getFullName).orElse("Anonymous");
-				resolution.setText(resolution.getText() + ", by " + fullName);
+				String name = this.users.findByUsername(resolution.getOwner())
+						.map(User::getFullName).orElse("none");
+				resolution.setText(resolution.getText() + ", by " + name);
 			}
 		}
 		return resolutions;
