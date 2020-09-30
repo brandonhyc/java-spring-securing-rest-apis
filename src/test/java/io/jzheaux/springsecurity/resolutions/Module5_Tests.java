@@ -85,7 +85,7 @@ public class Module5_Tests {
     UserDetailsService userDetailsService;
 
     @Autowired
-     ;
+    ResolutionController resolutionController;
 
     @Autowired
     ResolutionRepository resolutionRepository;
@@ -359,7 +359,7 @@ public class Module5_Tests {
                 (hasread, hasread, AuthorityUtils.createAuthorityList("resolution:read"));
         SecurityContextHolder.getContext().setAuthentication(token);
         try {
-            Collection<String> texts = StreamSupport.stream(this..read().spliterator(), false)
+            Collection<String> texts = StreamSupport.stream(this.resolutionController.read().spliterator(), false)
                     .map(Resolution::getText).collect(Collectors.toList());
             assertTrue(
                     "Task 5: Even though `haswrite` shared a `Resolution` with `hasread`, `hasread` doesn't have it or its getting filtered out. " +

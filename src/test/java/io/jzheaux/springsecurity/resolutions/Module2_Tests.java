@@ -87,7 +87,7 @@ public class Module2_Tests {
 	ResolutionRepository repository;
 
 	@Autowired(required = false)
-	 authorizer;
+	ResolutionAuthorizer authorizer;
 
 	@Autowired(required = false)
 	UserDetailsService userDetailsService;
