@@ -28,10 +28,50 @@ public class User implements Serializable {
 
     public User() {}
 
+    public User(User user) {
+        this.id = user.id;
+        this.username = user.username;
+        this.password = user.password;
+        this.enabled = user.enabled;
+        this.userAuthorities = user.userAuthorities;
+    }
+
     public User(String username, String password) {
         this.id = UUID.randomUUID();
         this.username = username;
         this.password = password;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public Collection<UserAuthority> getUserAuthorities() {
+        return userAuthorities;
+    }
+
+    public void setUserAuthorities(Collection<UserAuthority> userAuthorities) {
+        this.userAuthorities = userAuthorities;
     }
 
     public void setUsername(String username) {
